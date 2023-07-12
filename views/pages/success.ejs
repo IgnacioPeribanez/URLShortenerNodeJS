@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Profile View</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="mt-5">
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <div class="text-right">
+        <a class="btn btn-danger" href="/" role="button">LogOut</a>
+      </div>
+      <h1 class="text-primary  text-center"><span class="fa fa-user"></span> Profile View</h1> <br><br>
+      <div class="row">
+        <div class="col-12">
+          <div class="text-center">
+            <form action="/shortUrl" method="post">
+              <input type="url" placeholder="Enter the URL" name="fullUrl" required />
+              <input type="submit" value="Convert" />
+            </form>
+          </div>
+          <br>
+        </div>
+      </div>
+      <br>
+      <h1 class="text-info text-center"><span class="fa fa-link"></span> Your urls</h1>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id del usuario</th>
+            <th>URL Original</th>
+            <th>URL Nueva</th>
+            <th>Interacciones</th>
+            <th>Creacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(urls.length){ for(var i=0; i< urls.length; i++) {%>
+            <tr>
+              <td>
+                <%= urls[i].id_Usuario%>
+              </td>
+              <td>
+                <%= urls[i].url_Original%>
+              </td>
+              <td>
+                <%= urls[i].url_Nueva%>
+              </td>
+              <td>
+                <%= urls[i].interacciones%>
+              </td>
+              <td>
+                <%= urls[i].creacion.toISOString().slice(0,10);%>
+              </td>
+              <td>
+                <a href="http://localhost:3000/?id=<%= urls[i].url_Nueva%>"> Link </a>
+              </td>
+            </tr>
+            <% } }else{ %>
+              <tr>
+                <td>Aun no has creado ninguna URL</td>
+              </tr>
+              <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
